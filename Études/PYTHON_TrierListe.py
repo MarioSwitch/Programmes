@@ -4,7 +4,7 @@ L=[]
 # Création de la liste
 taille=int(input("Quantité de valeurs : "))
 for i in range(1,taille+1):
-	print("Il reste ", taille+i-1, "valeurs à saisir.")
+	print("Il reste ", taille+1-i, "valeurs à saisir.")
 	valeur=float(input("Entrez une valeur : "))
 	L.append(valeur)
 
