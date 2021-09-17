@@ -1,12 +1,12 @@
-# Initialisation des variables
-valeur=0
+# Initialisation de la liste
 L=[]
 
 # Création de la liste
-taille=int(input("Taille de la liste : "))
+taille=int(input("Quantité de valeurs : "))
 for i in range(1,taille+1):
-  valeur=float(input("Entrez une valeur : "))
-  L.append(valeur)
+	print("Il reste ", taille+i-1, "valeurs à saisir.")
+	valeur=float(input("Entrez une valeur : "))
+	L.append(valeur)
 
 # Tri
 for y in range(1, taille+1):
