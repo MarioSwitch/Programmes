@@ -1,0 +1,18 @@
+#include <stdio.h>
+
+int main() {
+	int a=0, entier=2, diviseur=2, divisible=0, max=0;
+	printf("Maximum:");
+	scanf("%i", &max);
+	for (entier=2; entier<=max; entier++) {
+		divisible=0;
+		for (diviseur=2; diviseur<entier; diviseur++) {
+			if (entier%diviseur==0) {
+				divisible++;
+			}
+		}
+	    if (divisible==0) {
+		    printf("%i est un nombre premier.\n", entier);
+    	}
+	}
+}
