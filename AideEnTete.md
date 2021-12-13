@@ -6,10 +6,4 @@
 
 # Description des fonctions
 ## Mise en forme
-**`black()` :** Passe l'écriture en noir.
-
-**`red()` :** Passe l'écriture en rouge.
-
-**`green()` :** Passe l'écriture en vert.
-
-**`yellow()` :** Passe l'écriture en jaune.
+**`style()` :** Change le style (couleur d'écriture, couleur de fond, gras, etc.).
