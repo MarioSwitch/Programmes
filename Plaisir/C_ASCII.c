@@ -5,9 +5,6 @@ void red(){
 void green(){
     printf("\033[0;32m");
 }
-void white(){
-    printf("\033[0;30m");
-}
 void bold(){
     printf("\033[1m");
 }
