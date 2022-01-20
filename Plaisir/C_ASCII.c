@@ -60,5 +60,5 @@ int main(){
     for(i=33;i<127;i++){
         printf("%3i:%c\n",i,i);
     }
-    printf("127:retour\n");
+    printf("127:supprimer\n");
 }
