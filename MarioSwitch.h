@@ -18,6 +18,9 @@ sv:Svenska/Swedish
 char* ordinal(char* lang, int place){ //Supported languages: de, dk, en, es, fi, fr, it, no, sv
     char* placestr[11];
     sprintf(placestr, "%i", place);
+    if(place<1){
+        return "*Place must be positive*";
+    }
     if(lang=="de" || lang=="dk" || lang=="fi" || lang=="no"){
         return strcat(placestr,".");
     }
