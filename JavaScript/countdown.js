@@ -57,3 +57,76 @@ function countdownTo(goal, formatBefore = "%countdown", formatAfter = "", id = "
     setTimeout(countdownTo, 1000, goal, formatBefore, formatAfter, id);
     document.getElementById(id).innerHTML = finalString;
 }
+
+/*
+----- ENGLISH -----
+This function does the same as above but with 2 dates (one start and one end).
+
+Parameters:
+    start and end parameters must be in YYYY-MM-DDTHH:ii:ssZ format
+    format parameters (formatBefore, formatBetween and formatAfter) will be used to show formatted text with %countStart and %countEnd replaced by the actual gap with the start and/or the end
+    id parameter is the same as above
+
+Usage:
+    Same as above. Be careful to call the right function in your created script!
+
+----- FRENCH / FRANÇAIS -----
+Cette fonction fait la même chose que celle ci-dessus mais avec 2 dates (une de début et une de fin).
+
+Paramètres :
+    Les paramètres "start" et "end" doivent être des dates au format YYYY-MM-DDTHH:ii:ssZ
+    Les paramètres "formatBefore", "formatBetween" et "formatAfter" seront utilisés respectivement avant le début, entre le début et la fin et après la fin. Ces paramètres doivent être du texte, %countStart sera remplacé par l'écart actuel avec la date de début, %countEnd par l'écart actuel avec celle de fin.
+    Le paramètre "id" fonctionne de la même manière que la fonction ci-dessus.
+
+Utilisation :
+    Même système que la fonction précédente. N'oubliez pas d'appeler la bonne fonction dans le script que vous créez !
+*/
+
+
+function countdownToStartEnd(start, end, formatBefore = "%countStart avant le début", formatBetween = "%countEnd avant la fin", formatAfter = "Fini depuis %countEnd", id = "countdown"){
+    var nowDate = new Date();
+    var startDate = new Date(start);
+    var endDate = new Date(end);
+    if(startDate > endDate){
+        var startDate = new Date(end);
+        var endDate = new Date(start);
+    }
+    var gapStart = Math.abs(startDate - nowDate);
+    var gapEnd = Math.abs(endDate - nowDate);
+    //Formatting countStringStart
+    if(gapStart>=360000000){ //if more than 100 hours (4d 4h)
+        var countStringStart = Math.floor(gapStart/86400000)+"j";
+    }
+    if(gapStart<360000000 && gapStart>=6000000){ //if between 100 mins (1h 40m) and 100 hours (4d 4h)
+        var countStringStart = Math.floor(gapStart/3600000)+"h "+("0"+Math.floor(gapStart/60000)%60).slice(-2)+"m";
+    }
+    if(gapStart<6000000 && gapStart>=60000){ //if between 1 and 100 mins (1h 40m)
+        var countStringStart = Math.floor(gapStart/60000)+"' "+("0"+Math.floor(gapStart/1000)%60).slice(-2)+"''";
+    }
+    if(gapStart<60000 && gapStart>=0){ //if less than 1 min
+        var countStringStart = Math.floor(gapStart/1000)+"''";
+    }
+    //Formatting countStringEnd
+    if(gapEnd>=360000000){ //if more than 100 hours (4d 4h)
+        var countStringEnd = Math.floor(gapEnd/86400000)+"j";
+    }
+    if(gapEnd<360000000 && gapEnd>=6000000){ //if between 100 mins (1h 40m) and 100 hours (4d 4h)
+        var countStringEnd = Math.floor(gapEnd/3600000)+"h "+("0"+Math.floor(gapEnd/60000)%60).slice(-2)+"m";
+    }
+    if(gapEnd<6000000 && gapEnd>=60000){ //if between 1 and 100 mins (1h 40m)
+        var countStringEnd = Math.floor(gapEnd/60000)+"' "+("0"+Math.floor(gapEnd/1000)%60).slice(-2)+"''";
+    }
+    if(gapEnd<60000 && gapEnd>=0){ //if less than 1 min
+        var countStringEnd = Math.floor(gapEnd/1000)+"''";
+    }
+    //Choosing the right format
+    if(nowDate < startDate){
+        var finalString = formatBefore.replace('%countStart',countStringStart).replace('%countEnd',countStringEnd);
+    }else if(nowDate >= startDate && nowDate < endDate){
+        var finalString = formatBetween.replace('%countStart',countStringStart).replace('%countEnd',countStringEnd);
+    }else if(nowDate >= endDate){
+        var finalString = formatAfter.replace('%countStart',countStringStart).replace('%countEnd',countStringEnd);
+    }
+    setTimeout(countdownToStartEnd, 1000, start, end, formatBefore, formatBetween, formatAfter, id);
+    document.getElementById(id).innerHTML = finalString;
+}
